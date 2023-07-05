@@ -1,4 +1,4 @@
-@using eShopLegacy.Utilities
+@using eShopLegacy.Utilities;
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +42,8 @@
                     <br />
                    @* @{ var sessionInfo = new HtmlString($"{HttpContext.Current.Session["MachineName"]}, {HttpContext.Current.Session["SessionStartTime"]}");}
                     <small>@sessionInfo</small>
-                    <br />
-                    <small>@WebHelper.UserAgent</small*@>
+                    <br />*@
+                    <small>@WebHelper.UserAgent</small>
                 </section>
 
             </article>

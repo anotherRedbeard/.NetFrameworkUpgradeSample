@@ -105,6 +105,9 @@
     <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.SystemWebAdapters, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.SystemWebAdapters.1.1.0\lib\net472\Microsoft.AspNetCore.SystemWebAdapters.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -458,9 +461,9 @@
       <Project>{c06afef4-f9ea-4c92-9a4f-335529727bc5}</Project>
       <Name>eShopLegacy.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eShopLegacy.Utilities\eShopLegacy.Utilities.csproj">
-      <Project>{d466562e-f48c-4ef1-ae08-3a80b0ed9671}</Project>
-      <Name>eShopLegacy.Utilities</Name>
+    <ProjectReference Include="..\eShopLegacy.UtilitiesCore\eShopLegacy.UtilitiesCore.csproj">
+      <Project>{fbe353f5-68ec-4aea-8445-125b4524afc1}</Project>
+      <Name>eShopLegacy.UtilitiesCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
