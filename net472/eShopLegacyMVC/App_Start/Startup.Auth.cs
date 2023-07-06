@@ -5,6 +5,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using eShopLegacyMVC.Models;
+using Microsoft.Owin.Security.DataProtection;
+using System.IO;
+using Microsoft.Owin.Security.Interop;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace eShopLegacyMVC
 {
@@ -21,10 +25,26 @@ namespace eShopLegacyMVC
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             // Configure the sign in cookie
+            var keyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DPKeys");
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
+                CookieName = ".AspNet.ApplicationCookie",
+                CookieSameSite = SameSiteMode.Lax,
+                SlidingExpiration = true,
+                ExpireTimeSpan = TimeSpan.FromMinutes(120),
+                TicketDataFormat = new AspNetTicketDataFormat(
+                new DataProtectorShim(
+                        DataProtectionProvider.Create(new DirectoryInfo(keyPath),
+                        (builder) =>
+                        {
+                            builder.SetApplicationName("eShop");
+                        })
+                        .CreateProtector(
+                            "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
+                            "Identity.Application",
+                            "v2"))),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

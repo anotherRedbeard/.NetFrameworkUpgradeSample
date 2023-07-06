@@ -2,6 +2,9 @@
 using eShopLegacy.Models;
 using eShopLegacyMVC.Models;
 using eShopLegacyMVC.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SystemWebAdapters.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSystemWebAdapters()
@@ -17,7 +20,23 @@ builder.Services.AddSystemWebAdapters()
         options.ApiKey = builder.Configuration["RemoteAppApiKey"];
     })
     .AddSessionClient()
-    .AddAuthenticationClient(true);
+    .AddAuthenticationClient(false);
+
+var keyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DPKeys");
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(keyPath))
+    .SetApplicationName("eShop");
+
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+    {
+        options.Cookie.Name = ".AspNet.ApplicationCookie";
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.Cookie.Path = "/";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+    });
 
 builder.Services.AddHttpForwarder();
 
