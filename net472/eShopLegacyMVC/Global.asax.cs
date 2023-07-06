@@ -46,7 +46,8 @@ namespace eShopLegacyMVC
                 {
                     options.ApiKey = ConfigurationManager.AppSettings["RemoteAppApiKey"];
                 })
-                .AddSessionServer();
+                .AddSessionServer()
+                .AddAuthenticationServer();
         }
 
         /// <summary>

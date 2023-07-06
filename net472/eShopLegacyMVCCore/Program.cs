@@ -16,7 +16,8 @@ builder.Services.AddSystemWebAdapters()
         options.RemoteAppUrl = new Uri(builder.Configuration["ProxyTo"]);
         options.ApiKey = builder.Configuration["RemoteAppApiKey"];
     })
-    .AddSessionClient();
+    .AddSessionClient()
+    .AddAuthenticationClient(true);
 
 builder.Services.AddHttpForwarder();
 
