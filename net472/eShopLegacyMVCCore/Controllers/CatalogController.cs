@@ -160,8 +160,7 @@ namespace eShopLegacyMVC.Controllers
 
         private void AddUriPlaceHolder(CatalogItem item)
         {
-            //item.PictureUri = this.Url.RouteUrl(PicController.GetPicRouteName, new { catalogItemId = item.Id }, this.Request.Url.Scheme);            
-            item.PictureUri = $"/items/{item.Id}/pic";
+            item.PictureUri = this.Url.RouteUrl(PicController.GetPicRouteName, new { catalogItemId = item.Id }, this.Request.Scheme);
         }
     }
 }
